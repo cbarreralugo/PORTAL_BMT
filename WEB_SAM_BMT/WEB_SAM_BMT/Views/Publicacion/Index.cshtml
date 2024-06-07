@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WEB_SAM_BMT.Models.Publicacion>
+
+@{
+    ViewBag.Title = "Publicaciones";
+}
+
+<h2>Publicaciones</h2>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha de Publicación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.nombre_app</td>
+                <td>@item.fecha_publicacion.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Details", new { id = item.id_publicacion })">Detalles</a>
+                    <a class="btn btn-success" href="@item.ruta_origen" target="_blank">Abrir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

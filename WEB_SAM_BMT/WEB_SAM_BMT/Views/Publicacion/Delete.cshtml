@@ -1,0 +1,96 @@
+﻿@model WEB_SAM_BMT.Models.Publicacion
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Publicacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_app)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_app)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ruta_origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ruta_origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.servidor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.servidor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_publicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_publicacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_app)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_app)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SQL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SQL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_publicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_publicacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

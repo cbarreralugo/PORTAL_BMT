@@ -1,0 +1,82 @@
+﻿@model WEB_SAM_BMT.Models.Publicacion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Publicacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name_app)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name_app)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ruta_origen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ruta_origen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.servidor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.servidor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_publicacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_publicacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_app)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_app)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sql)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sql)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_publicacion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

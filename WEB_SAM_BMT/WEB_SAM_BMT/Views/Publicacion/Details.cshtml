@@ -1,0 +1,47 @@
+﻿@model WEB_SAM_BMT.Models.Publicacion
+
+@{
+    ViewBag.Title = "Detalles de Publicación";
+}
+
+<h2>Detalles de Publicación</h2>
+
+<div class="card">
+    <div class="card-header">
+        <h3>@Model.nombre_app</h3>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">ID</dt>
+            <dd class="col-sm-9">@Model.id_publicacion</dd>
+
+            <dt class="col-sm-3">Nombre de la Aplicación</dt>
+            <dd class="col-sm-9">@Model.nombre_app</dd>
+
+            <dt class="col-sm-3">Ruta de Origen</dt>
+            <dd class="col-sm-9">@Model.ruta_origen</dd>
+
+            <dt class="col-sm-3">Servidor</dt>
+            <dd class="col-sm-9">@Model.servidor</dd>
+
+            <dt class="col-sm-3">Tipo de Publicación</dt>
+            <dd class="col-sm-9">@Model.tipo_publicacion</dd>
+
+            <dt class="col-sm-3">Tipo de Aplicación</dt>
+            <dd class="col-sm-9">@Model.tipo_app</dd>
+
+            <dt class="col-sm-3">SQL</dt>
+            <dd class="col-sm-9">@Model.SQL</dd>
+
+            <dt class="col-sm-3">Fecha de Publicación</dt>
+            <dd class="col-sm-9">@Model.fecha_publicacion.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Estatus</dt>
+            <dd class="col-sm-9">@Model.estatus</dd>
+
+            <dt class="col-sm-3">Activo</dt>
+            <dd class="col-sm-9">@Model.activo</dd>
+        </dl>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
