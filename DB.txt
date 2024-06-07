@@ -1,0 +1,158 @@
+USE [SAM_BMT]
+GO
+/****** Object:  Table [dbo].[tb_bmt_publicacion]    Script Date: 07/06/2024 08:49:08 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_bmt_publicacion](
+	[id_publicacion] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_app] [varchar](250) NULL,
+	[ruta_origen] [varchar](max) NULL,
+	[servidor] [varchar](max) NULL,
+	[tipo_publicacion] [int] NULL,
+	[tipo_app] [int] NULL,
+	[SQL] [bit] NULL,
+	[fecha_publicacion] [datetime] NULL,
+	[estatus] [varchar](50) NULL,
+	[activo] [bit] NULL,
+ CONSTRAINT [PK_tb_bmt_publicacion] PRIMARY KEY CLUSTERED 
+(
+	[id_publicacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_bmt_tipo_app_c]    Script Date: 07/06/2024 08:49:08 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_bmt_tipo_app_c](
+	[id_tipo_app] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_tipo] [varchar](50) NULL,
+	[activo] [bit] NULL,
+ CONSTRAINT [PK_tb_bmt_tipo_app_c] PRIMARY KEY CLUSTERED 
+(
+	[id_tipo_app] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tb_bmt_tipo_publicacion_c]    Script Date: 07/06/2024 08:49:08 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_bmt_tipo_publicacion_c](
+	[id_tipo_publicacion] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_tipo] [varchar](50) NULL,
+	[activo] [bit] NULL,
+ CONSTRAINT [PK_tb_bmt_tipo_publicacion_c] PRIMARY KEY CLUSTERED 
+(
+	[id_tipo_publicacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[tb_bmt_tipo_app_c] ON 
+GO
+INSERT [dbo].[tb_bmt_tipo_app_c] ([id_tipo_app], [nombre_tipo], [activo]) VALUES (1, N'Administrativo', 1)
+GO
+INSERT [dbo].[tb_bmt_tipo_app_c] ([id_tipo_app], [nombre_tipo], [activo]) VALUES (2, N'Herramienta', 1)
+GO
+SET IDENTITY_INSERT [dbo].[tb_bmt_tipo_app_c] OFF
+GO
+SET IDENTITY_INSERT [dbo].[tb_bmt_tipo_publicacion_c] ON 
+GO
+INSERT [dbo].[tb_bmt_tipo_publicacion_c] ([id_tipo_publicacion], [nombre_tipo], [activo]) VALUES (1, N'Web', 1)
+GO
+INSERT [dbo].[tb_bmt_tipo_publicacion_c] ([id_tipo_publicacion], [nombre_tipo], [activo]) VALUES (2, N'Escritorio', 1)
+GO
+SET IDENTITY_INSERT [dbo].[tb_bmt_tipo_publicacion_c] OFF
+GO
+/****** Object:  StoredProcedure [dbo].[sp_bmt_crear_app_publicada]    Script Date: 07/06/2024 08:49:08 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_bmt_crear_app_publicada] 
+	-- Add the parameters for the stored procedure here
+	@nombre as varchar(250),
+	@ruta as varchar(max),
+	@servidor as varchar(max), 
+	@tipo_publicacion as int,
+	@tipo_app as int,
+	@sql as int,
+	@estatus as varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+ 
+
+INSERT INTO [dbo].[tb_bmt_publicacion]
+           ([nombre_app]
+           ,[ruta_origen]
+           ,[servidor]
+           ,[tipo_publicacion]
+           ,[tipo_app]
+           ,[SQL]
+           ,[fecha_publicacion]
+           ,[estatus]
+           ,[activo])
+     VALUES
+           (@nombre,
+           @ruta,
+           @servidor
+           ,@tipo_publicacion
+           ,@tipo_app
+           ,@sql
+           ,GetDATE()
+           ,@estatus
+           ,1)
+ 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_bmt_obtener_app_publicadas]    Script Date: 07/06/2024 08:49:08 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_bmt_obtener_app_publicadas]
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT
+	p.id_publicacion as 'id',
+	p.nombre_app as 'Nombre de proyecto',
+	p.ruta_origen as 'Origen de proyecto',
+	p.servidor as 'Server publicado',
+	tp.nombre_tipo as 'Tipo de publicación',
+	p.sql as 'Ejecuto scripts de sql',
+	p.fecha_publicacion as 'Fecha de publicación',
+	p.estatus as 'Estatus de publicación',
+	p.activo 
+	FROM
+	tb_bmt_publicacion p
+	inner join tb_bmt_tipo_publicacion_c tp on p.id_publicacion=tp.id_tipo_publicacion
+	inner join tb_bmt_tipo_app_c ta on p.tipo_app= ta.id_tipo_app
+	WHERE
+	p.activo =1
+	 
+END
+GO
